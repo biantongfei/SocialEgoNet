@@ -5,7 +5,7 @@ This is the official repo for the ICME2025 paper:
 [Interact with me: joint prediction of self-centred interaction intentions, attitudes and social actions](https://arxiv.org/abs/2412.16698) [![arXiv](https://img.shields.io/badge/arXiv-2412.16698-b31b1b.svg)](https://arxiv.org/abs/2412.16698)
 
 <div align="center">
-    <img src="docs/model_structure_2.png", height="350" alt>
+    <img src="docs/model_structure_2.png", height="300" alt>
 </div>
 
 Abstract:
