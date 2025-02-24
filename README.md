@@ -69,6 +69,17 @@ To test the pretrained weights on JPL-P4S, run
 python scripts/test.py --cfg config/test.yaml --check_point weights/socialegonet_jpl.pt
 ```
 
+## Citation
+Please cite the following paper if you use this repository in your reseach.
+```
+@article{bian2024interact,
+  title={Interact with me: Joint Egocentric Forecasting of Intent to Interact, Attitude and Social Actions},
+  author={Bian, Tongfei and Ma, Yiming and Chollet, Mathieu and Sanchez, Victor and Guha, Tanaya},
+  journal={arXiv preprint arXiv:2412.16698},
+  year={2024}
+}
+```
+
 ## Refrences 
 ```
 [1] Du Tran, Heng Wang, Lorenzo Torresani, Jamie Ray, Yann LeCun, and Manohar Paluri, “A closer look at spatiotemporal convolutions for action recognition,” in Proceedings of the IEEE conference on Computer Vision and Pattern Recognition, 2018, pp. 6450–6459. 2, 4, 5
