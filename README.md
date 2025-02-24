@@ -1,8 +1,8 @@
 # SocialEgoNet
 
-This is the official repo for the ICME2025 paper [Interact with me: joint prediction of self-centred interaction intentions, attitudes and social actions](https://arxiv.org/abs/2412.16698)[![arXiv](https://img.shields.io/badge/arXiv-2412.16698-b31b1b.svg)].
+This is the official repo for the ICME2025 paper [Interact with me: joint prediction of self-centred interaction intentions, attitudes and social actions](https://arxiv.org/abs/2412.16698).
 
-(https://arxiv.org/abs/2412.16698)
+[![arXiv](https://img.shields.io/badge/arXiv-2412.16698-b31b1b.svg)](https://arxiv.org/abs/2412.16698)
 
 Abstract:
 
