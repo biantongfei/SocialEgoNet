@@ -5,10 +5,7 @@ This is the official repo for the ICME2025 paper [Interact with me: joint predic
 [![arXiv](https://img.shields.io/badge/arXiv-2412.16698-b31b1b.svg)](https://arxiv.org/abs/2412.16698)
 
 <div align="center">
-    <img src="docs/model_structure.png", height="250" alt>
-<div align="center">
-    The intent-to-interact task forecasts whether a person in the field of view is interacting, interested or not interested. Attitude towards agent is either positive or negative. The action task anticipates which action the person is going to perform.
-</div>
+    <img src="docs/model_structure_2.png", height="250" alt>
 </div>
 
 Abstract:
