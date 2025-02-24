@@ -1,12 +1,11 @@
 train:
   batch_size: 128
-  num_epochs: 50
+  num_epochs: 5
   learning_rate: 0.01
   optimizer: adam
 
 data:
-  path: "../JPL_Augmented_Posefeatures/"
-  #  path: "../JPL_P4S/"
+  path: "../JPL_P4S/"
   sequence_length: 30
 
 model:
