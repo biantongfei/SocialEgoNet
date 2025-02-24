@@ -9,9 +9,9 @@ Abstract:
 For efficient human-agent interaction, an agent should proactively recognize their target user and prepare for upcoming interactions. We formulate this challenging problem as the novel task of jointly forecasting a person's intent to interact with the agent, their attitude towards the agent and the action they will perform, from the agent's (egocentric) perspective. So we propose **SocialEgoNet** - a graph-based spatiotemporal framework that exploits task dependencies through a hierarchical multitask learning approach. SocialEgoNet uses whole-body skeletons (keypoints from face, hands and body) extracted from only 1 second of video input for high inference speed. For evaluation, we augment an existing egocentric human-agent interaction dataset with new class labels and bounding box annotations. Extensive experiments on this augmented dataset, named JPL-Social, demonstrate **real-time** inference and superior performance (average accuracy across all tasks: 83.15\%) of our model outperforming several competitive baselines. The additional annotations and code will be available upon acceptance.
 
 <div align="center">
-    <img src="docs/teaser_3.png", height="150" alt>
-    <img src="docs/teaser_4.png", height="150" alt>
-    <img src="docs/teaser_1.png", height="150" alt>
+    <img src="docs/teaser_3.png", height="250" alt>
+    <img src="docs/teaser_4.png", height="250" alt>
+    <img src="docs/teaser_1.png", height="250" alt>
 <div align="center">
     The intent-to-interact task forecasts whether a person in the field of view is **interacting**, **interested** or **not interested**. Attitude towards agent is either **positive** or **negative**. The action task anticipates which action the person is going to perform.
 </div>
