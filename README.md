@@ -1,14 +1,14 @@
 # SocialEgoNet
 
 This is the official repo for the ICME2025 paper: 
-[Interact with me: joint prediction of self-centred interaction intentions, attitudes and social actions](https://arxiv.org/abs/2412.16698).[![arXiv](https://img.shields.io/badge/arXiv-2412.16698-b31b1b.svg)](https://arxiv.org/abs/2412.16698)
+
+[Interact with me: joint prediction of self-centred interaction intentions, attitudes and social actions](https://arxiv.org/abs/2412.16698) [![arXiv](https://img.shields.io/badge/arXiv-2412.16698-b31b1b.svg)](https://arxiv.org/abs/2412.16698)
 
 <div align="center">
     <img src="docs/model_structure_2.png", height="250" alt>
 </div>
 
 Abstract:
-
 For efficient human-agent interaction, an agent should proactively recognize their target user and prepare for upcoming interactions. We formulate this challenging problem as the novel task of jointly forecasting a person's intent to interact with the agent, their attitude towards the agent and the action they will perform, from the agent's (egocentric) perspective. So we propose **SocialEgoNet** - a graph-based spatiotemporal framework that exploits task dependencies through a hierarchical multitask learning approach. SocialEgoNet uses whole-body skeletons (keypoints from face, hands and body) extracted from only 1 second of video input for high inference speed. For evaluation, we augment an existing egocentric human-agent interaction dataset with new class labels and bounding box annotations. Extensive experiments on this augmented dataset, named JPL-Social, demonstrate **real-time** inference and superior performance (average accuracy across all tasks: 83.15\%) of our model outperforming several competitive baselines. The additional annotations and code will be available upon acceptance.
 
 <div align="center">
@@ -34,7 +34,7 @@ For efficient human-agent interaction, an agent should proactively recognize the
 ## Data
 This dataset used in the paper, JPL-P4S, is based on the [JPL First-Person Interaction dataset (JPL-Interaction dataset)](http://michaelryoo.com/jpl-interaction.html). JPL-P4S has the whole-body key points of people in videos getting from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), including body, face and hand, and the additional social intention attitude and action classes of each person in videos. JPL-P4S can be downloaded from [here](https://drive.google.com/file/d/1vrJJtOt2sG4xK8XPIX7eDynLhKcc2mJq/view?usp=sharing).
 
-Schema of json files
+Metadata
 ```
 {
   "video_name": Name of the video this person is in (string),
