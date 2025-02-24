@@ -1,0 +1,18 @@
+train:
+  batch_size: 128
+  num_epochs: 50
+  learning_rate: 0.01
+  optimizer: adam
+
+data:
+  path: "../JPL_Augmented_Posefeatures/"
+  #  path: "../JPL_P4S/"
+  sequence_length: 30
+
+model:
+  gcn_hidden_dim: 16
+  gcn_num_layers: 3
+  lstm_hidden_dim: 128
+  lstm_num_layers: 3
+  fc1_hidden: 64
+  fc2_hidden: 16
