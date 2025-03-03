@@ -34,7 +34,7 @@ For efficient human-agent interaction, an agent should proactively recognize the
 Δ refers to the time to extract the whole-body pose keypoints. In our case, [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) takes 1.27 ms to extract whole-body pose features from an annotated frame.
 
 ## Data
-This dataset used in the paper, JPL-P4S, is based on the [JPL First-Person Interaction dataset (JPL-Interaction dataset)](http://michaelryoo.com/jpl-interaction.html). JPL-P4S has the whole-body key points of people in videos getting from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), including body, face and hand, and the additional social intention attitude and action classes of each person in videos. JPL-P4S can be downloaded from [here](https://drive.google.com/file/d/1vrJJtOt2sG4xK8XPIX7eDynLhKcc2mJq/view?usp=sharing).
+This dataset used in the paper, JPL-Social, is based on the [JPL First-Person Interaction dataset (JPL-Interaction dataset)](http://michaelryoo.com/jpl-interaction.html). JPL-Social has the whole-body key points of people in videos getting from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), including body, face and hand, and the additional social intention attitude and action classes of each person in videos. JPL-Social can be downloaded from [here](https://drive.google.com/file/d/1vrJJtOt2sG4xK8XPIX7eDynLhKcc2mJq/view?usp=sharing).
 
 Metadata
 ```
@@ -59,14 +59,14 @@ Metadata
 
 ## Train and Test
 
-To train and test SocialEgoNet on JPL-P4S, you need download the data and save it under the current project path.
+To train and test SocialEgoNet on JPL-Social, you need download the data and save it under the current project path.
 
 To train a new SocialEgoNet, run
 ```
 python scripts/train.py --cfg config/train.yaml
 ```
 
-To test the pretrained weights on JPL-P4S, run
+To test the pretrained weights on JPL-Social, run
 ```
 python scripts/test.py --cfg config/test.yaml --check_point weights/socialegonet_jpl.pt
 ```
