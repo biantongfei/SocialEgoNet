@@ -1,5 +1,5 @@
 data:
-  path: "../JPL_P4S/"
+  path: "../JPL_Social/"
   sequence_length: 30
 
 model:
