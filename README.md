@@ -74,10 +74,10 @@ python scripts/test.py --cfg config/test.yaml --check_point weights/socialegonet
 ## Citation
 Please cite the following paper if you use this repository in your reseach.
 ```
-@article{bian2024interact,
-  title={Interact with me: Joint Egocentric Forecasting of Intent to Interact, Attitude and Social Actions},
+@INPROCEEDINGS{bian2024interact,
   author={Bian, Tongfei and Ma, Yiming and Chollet, Mathieu and Sanchez, Victor and Guha, Tanaya},
-  journal={arXiv preprint arXiv:2412.16698},
+  booktitle={2025 IEEE International Conference on Multimedia and Expo (ICME)}, 
+  title={Interact with me: Joint Egocentric Forecasting of Intent to Interact, Attitude and Social Actions}, 
   year={2024}
 }
 ```
