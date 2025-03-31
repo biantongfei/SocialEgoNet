@@ -5,7 +5,7 @@ This is the official repo for the ICME2025 paper:
 [Interact with me: joint prediction of self-centred interaction intentions, attitudes and social actions](https://arxiv.org/abs/2412.16698) [![arXiv](https://img.shields.io/badge/arXiv-2412.16698-b31b1b.svg)](https://arxiv.org/abs/2412.16698)
 
 <div align="center">
-    <img src="docs/model_structure_2.png", height="300" alt>
+    <img src="docs/model_structure_2.png", height="280" alt>
 </div>
 
 Abstract:
@@ -34,7 +34,7 @@ For efficient human-agent interaction, an agent should proactively recognize the
 Δ refers to the time to extract the whole-body pose keypoints. In our case, [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) takes 1.27 ms to extract whole-body pose features from an annotated frame.
 
 ## Data
-This dataset used in the paper, JPL-Social, is based on the [JPL First-Person Interaction dataset (JPL-Interaction dataset)](http://michaelryoo.com/jpl-interaction.html). JPL-Social has the whole-body key points of people in videos getting from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), including body, face and hand, and the additional social intention attitude and action classes of each person in videos. JPL-Social can be downloaded from [here](https://drive.google.com/file/d/1vrJJtOt2sG4xK8XPIX7eDynLhKcc2mJq/view?usp=sharing).
+This dataset used in the paper, JPL-Social, is based on the [JPL First-Person Interaction dataset (JPL-Interaction dataset)](http://michaelryoo.com/jpl-interaction.html). JPL-Social has the whole-body key points of people in videos getting from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), including body, face and hand, and the additional social intention attitude and action classes of each person in videos. JPL-Social can be downloaded from [here]([[https://drive.google.com/file/d/1vrJJtOt2sG4xK8XPIX7eDynLhKcc2mJq/view?usp=sharing]](https://drive.google.com/file/d/1gpH_T60e99cR_x4C5B2YKvPPa99rBzic/view?usp=drive_link)).
 
 Metadata
 ```
