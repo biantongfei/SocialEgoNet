@@ -72,7 +72,7 @@ python scripts/test.py --cfg config/test.yaml --check_point weights/socialegonet
 ```
 
 ## Citation
-Please cite the following paper if you use this repository in your reseach.
+Please cite the following paper if you use this repository in your research.
 ```
 @INPROCEEDINGS{bian2024interact,
   author={Bian, Tongfei and Ma, Yiming and Chollet, Mathieu and Sanchez, Victor and Guha, Tanaya},
