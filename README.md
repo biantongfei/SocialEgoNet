@@ -34,7 +34,7 @@ For efficient human-agent interaction, an agent should proactively recognize the
 Δ refers to the time to extract the whole-body pose keypoints. In our case, [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) takes 1.27 ms to extract whole-body pose features from an annotated frame.
 
 ## Data
-This dataset used in the paper, JPL-Social, is based on the [JPL First-Person Interaction dataset (JPL-Interaction dataset)](http://michaelryoo.com/jpl-interaction.html). JPL-Social has the whole-body key points of people in videos getting from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), including body, face and hand, and the additional social intention attitude and action classes of each person in videos. JPL-Social can be downloaded from [here](https://drive.google.com/file/d/1gpH_T60e99cR_x4C5B2YKvPPa99rBzic/view?usp=drive_link).
+This dataset used in the paper, JPL-Social, is based on the [JPL First-Person Interaction dataset (JPL-Interaction dataset)](http://michaelryoo.com/jpl-interaction.html). JPL-Social has the whole-body key points of people in videos getting from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose), including body, face and hand, and the additional social intention attitude and action classes of each person in videos. JPL-Social can be downloaded from [here]([https://drive.google.com/file/d/1gpH_T60e99cR_x4C5B2YKvPPa99rBzic/view?usp=drive_link](https://drive.google.com/file/d/1gpH_T60e99cR_x4C5B2YKvPPa99rBzic/view?usp=sharing)).
 
 Metadata
 ```
