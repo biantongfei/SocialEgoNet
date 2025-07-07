@@ -13,7 +13,7 @@ def filter_not_interacting_sample(att_y_true, att_y_output):
     return att_y_true[mask], att_y_output[mask]
 
 
-class JPLP4S_Dataset(Dataset):
+class JPL_Social_Dataset(Dataset):
     def __init__(self, data_path, sequence_length):
         super().__init__()
         self.files = os.listdir(data_path)

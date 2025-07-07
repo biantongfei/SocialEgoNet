@@ -1,0 +1,36 @@
+Index: config/test.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>data:\n  path: \"../JPL_P4S/\"\n  sequence_length: 30\n\nmodel:\n  gcn_hidden_dim: 16\n  gcn_num_layers: 3\n  lstm_hidden_dim: 128\n  lstm_num_layers: 3\n  fc1_hidden: 64\n  fc2_hidden: 16\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/test.yaml b/config/test.yaml
+--- a/config/test.yaml	(revision 297250362c7aa260d56fff9ad63d0de91bf60ae5)
++++ b/config/test.yaml	(date 1740435727264)
+@@ -1,5 +1,5 @@
+ data:
+-  path: "../JPL_P4S/"
++  path: "JPL_P4S/"
+   sequence_length: 30
+ 
+ model:
+Index: config/train.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>train:\n  batch_size: 128\n  num_epochs: 5\n  learning_rate: 0.01\n  optimizer: adam\n\ndata:\n  path: \"../JPL_P4S/\"\n  sequence_length: 30\n\nmodel:\n  gcn_hidden_dim: 16\n  gcn_num_layers: 3\n  lstm_hidden_dim: 128\n  lstm_num_layers: 3\n  fc1_hidden: 64\n  fc2_hidden: 16\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/train.yaml b/config/train.yaml
+--- a/config/train.yaml	(revision 297250362c7aa260d56fff9ad63d0de91bf60ae5)
++++ b/config/train.yaml	(date 1740435727259)
+@@ -5,7 +5,7 @@
+   optimizer: adam
+ 
+ data:
+-  path: "../JPL_P4S/"
++  path: "JPL_P4S/"
+   sequence_length: 30
+ 
+ model:

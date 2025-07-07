@@ -1,7 +1,7 @@
 from Models import SocialEgoNet
-from DataLoader import JPL_P4S_DataLoader
+from DataLoader import JPL_Social_DataLoader
 from constants import device
-from data import JPLP4S_Dataset, filter_not_interacting_sample
+from data import JPL_Social_Dataset, filter_not_interacting_sample
 
 import torch
 
@@ -54,9 +54,9 @@ def main():
     config = load_config(args.cfg)
 
     # 加载数据集
-    testset = JPLP4S_Dataset(config["data"]["path"] + "test/", config["data"]["sequence_length"])
-    test_loader = JPL_P4S_DataLoader(dataset=testset, sequence_length=config["data"]["sequence_length"],
-                                     batch_size=config["train"]["batch_size"])
+    testset = JPL_Social_Dataset(config["data"]["path"] + "test/", config["data"]["sequence_length"])
+    test_loader = JPL_Social_DataLoader(dataset=testset, sequence_length=config["data"]["sequence_length"],
+                                        batch_size=config["train"]["batch_size"])
 
     # 加载模型
     model = SocialEgoNet(sequence_length=config["data"]["sequence_length"], **config["model"])

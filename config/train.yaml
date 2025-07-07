@@ -5,7 +5,7 @@ train:
   optimizer: adam
 
 data:
-  path: "../JPL_Social/"
+  path: "../JPL_P4S/"
   sequence_length: 30
 
 model:

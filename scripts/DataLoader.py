@@ -19,7 +19,7 @@ class WholebodyPoseData:
         self.body = self.face = self.hands = None
 
 
-class JPL_P4S_DataLoader(DataLoader):
+class JPL_Social_DataLoader(DataLoader):
     def __init__(self, dataset, batch_size, sequence_length):
         super().__init__(dataset=dataset, batch_size=batch_size, num_workers=0, collate_fn=self.gcn_collate_fn)
         self.sequence_length = sequence_length

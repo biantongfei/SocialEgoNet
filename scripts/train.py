@@ -1,7 +1,7 @@
 from Models import SocialEgoNet
-from DataLoader import JPL_P4S_DataLoader
+from DataLoader import JPL_Social_DataLoader
 from constants import device
-from data import JPLP4S_Dataset, filter_not_interacting_sample
+from data import JPL_Social_Dataset, filter_not_interacting_sample
 
 import torch
 from torch.nn import functional
@@ -28,14 +28,14 @@ def load_config(cfg_path):
 def get_dataloaders(config):
     data_path = config['data']['path']
     sequence_length = config['data']['sequence_length']
-    trainset = JPLP4S_Dataset(data_path + 'train/', sequence_length)
-    valset = JPLP4S_Dataset(data_path + 'validation/', sequence_length)
-    testset = JPLP4S_Dataset(data_path + 'test/', sequence_length)
+    trainset = JPL_Social_Dataset(data_path + 'train/', sequence_length)
+    valset = JPL_Social_Dataset(data_path + 'validation/', sequence_length)
+    testset = JPL_Social_Dataset(data_path + 'test/', sequence_length)
 
     batch_size = config['train']['batch_size']
-    train_loader = JPL_P4S_DataLoader(trainset, batch_size=batch_size, sequence_length=sequence_length)
-    val_loader = JPL_P4S_DataLoader(valset, batch_size=batch_size, sequence_length=sequence_length)
-    test_loader = JPL_P4S_DataLoader(testset, batch_size=batch_size, sequence_length=sequence_length)
+    train_loader = JPL_Social_DataLoader(trainset, batch_size=batch_size, sequence_length=sequence_length)
+    val_loader = JPL_Social_DataLoader(valset, batch_size=batch_size, sequence_length=sequence_length)
+    test_loader = JPL_Social_DataLoader(testset, batch_size=batch_size, sequence_length=sequence_length)
 
     return train_loader, val_loader, test_loader
 
@@ -116,7 +116,7 @@ def main():
         evaluate_model(socialegonet, val_loader, 'validation')
 
     print("Testing model on test set...")
-    evaluate_model(socialegonet, val_loader, 'Test')
+    evaluate_model(socialegonet, test_loader, 'Test')
 
     if args.save_weights:
         torch.save(socialegonet.state_dict(), f"{args.save_weights}/socialegonet_jpl.pt")
