@@ -17,7 +17,7 @@ def load_config(cfg_path):
 
 
 def evaluate(model, dataloader):
-    """ 评估模型，计算准确率和F1分数 """
+    """ Evaluate model """
     model.eval()
     metrics = {"int": ([], []), "att": ([], []), "act": ([], [])}
 
@@ -53,12 +53,12 @@ def main():
 
     config = load_config(args.cfg)
 
-    # 加载数据集
+    # Load Data
     testset = JPL_Social_Dataset(config["data"]["path"] + "test/", config["data"]["sequence_length"])
     test_loader = JPL_Social_DataLoader(dataset=testset, sequence_length=config["data"]["sequence_length"],
                                         batch_size=config["train"]["batch_size"])
 
-    # 加载模型
+    # Load Model
     model = SocialEgoNet(sequence_length=config["data"]["sequence_length"], **config["model"])
     model.load_checkpoint(args.check_point)
     model.to(device)
@@ -66,7 +66,7 @@ def main():
     print("Testing...")
     results = evaluate(model, test_loader)
 
-    # 打印评估结果
+    # Print results
     for key in ["int", "att", "act"]:
         print(f"{key}_acc: {results[key][1]:.2f}, {key}_f1: {results[key][0]:.2f}")
 
