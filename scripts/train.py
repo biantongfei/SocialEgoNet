@@ -98,6 +98,7 @@ def main():
     scheduler = StepLR(optimizer, step_size=10, gamma=0.5)
 
     for epoch in range(config['train']['num_epochs']):
+        socialegonet.train()
         train_loader = tqdm(train_loader, dynamic_ncols=True)
         for inputs, (int_labels, att_labels, act_labels) in train_loader:
             int_labels, att_labels, act_labels = int_labels.to(device), att_labels.to(device), act_labels.to(device)
