@@ -24,9 +24,7 @@ def evaluate(model, dataloader):
 
     with torch.no_grad():
         for inputs, (int_labels, att_labels, act_labels) in tqdm(dataloader, dynamic_ncols=True, desc="Testing"):
-            int_labels, att_labels, act_labels = (int_labels.to(device),
-                                                  att_labels.to(device),
-                                                  act_labels.to(device))
+            int_labels, att_labels, act_labels = int_labels.to(device), att_labels.to(device), act_labels.to(device)
 
             int_outputs, att_outputs, act_outputs = model(inputs)
 
@@ -61,7 +59,7 @@ def main():
 
     # Load Model
     model = SocialEgoNet(sequence_length=config["data"]["sequence_length"], **config["model"])
-    weights = OrderedDict([[k.split('module.')[-1], v.cuda(device)] for k, v in torch.load(args.check_point).items()])
+    weights = OrderedDict([[k.split('module.')[-1], v] for k, v in torch.load(args.check_point).items()])
     model.load_state_dict(weights)
     model.to(device)
 
