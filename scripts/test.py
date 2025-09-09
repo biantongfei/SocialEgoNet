@@ -39,7 +39,7 @@ def evaluate(model, dataloader):
                 metrics[key][0].extend(labels.tolist())
                 metrics[key][1].extend(preds.tolist())
 
-    return {key: (f1_score(torch.tensor(y_true), torch.tensor(y_pred), average="weighted"),
+    return {key: (f1_score(torch.tensor(y_true), torch.tensor(y_pred) * 100, average="weighted"),
                   (torch.tensor(y_pred) == torch.tensor(y_true)).float().mean().item() * 100)
             for key, (y_true, y_pred) in metrics.items()}
 
