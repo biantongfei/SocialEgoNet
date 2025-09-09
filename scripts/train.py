@@ -112,7 +112,8 @@ def main():
             optimizer.zero_grad()
         scheduler.step()
 
-        evaluate_model(socialegonet, val_loader, 'validation')
+        # evaluate_model(socialegonet, val_loader, 'validation')
+        evaluate_model(socialegonet, val_loader, 'test')
 
     print("Testing model on test set...")
     evaluate_model(socialegonet, test_loader, 'Test')
