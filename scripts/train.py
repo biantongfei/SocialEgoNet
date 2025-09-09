@@ -101,8 +101,7 @@ def main():
     for epoch in range(config['train']['num_epochs']):
         train_loader = tqdm(train_loader, dynamic_ncols=True)
         for inputs, (int_labels, att_labels, act_labels) in train_loader:
-            inputs, int_labels, att_labels, act_labels = inputs.to(device), int_labels.to(device), att_labels.to(
-                device), act_labels.to(device)
+            int_labels, att_labels, act_labels = int_labels.to(device), att_labels.to(device), act_labels.to(device)
             int_outputs, att_outputs, act_outputs = socialegonet(inputs)
             loss_1 = functional.cross_entropy(int_outputs, int_labels)
             loss_2 = functional.cross_entropy(att_outputs, att_labels)

@@ -3,7 +3,7 @@ from torch import nn
 from torch_geometric.nn import GCN
 
 from constants import (intention_classes, attitude_classes, action_classes, coco_body_point_num, face_point_num,
-                       hands_point_num)
+                       hands_point_num, device)
 
 intention_class_num = len(intention_classes)
 attitude_class_num = len(attitude_classes)
@@ -72,9 +72,12 @@ class SocialEgoNet(nn.Module):
                                                                  self.gcn_hidden_dim * num_points)
 
     def forward(self, data):
-        x_body = self._apply_gcn(self.GCN_body, data.body.x, data.body.edge_index, data.body.batch, coco_body_point_num)
-        x_face = self._apply_gcn(self.GCN_face, data.face.x, data.face.edge_index, data.face.batch, face_point_num)
-        x_hand = self._apply_gcn(self.GCN_hand, data.hands.x, data.hands.edge_index, data.hands.batch, hands_point_num)
+        x_body = self._apply_gcn(self.GCN_body, data.body.x.to(device), data.body.edge_index.to(device),
+                                 data.body.batch.to(device), coco_body_point_num)
+        x_face = self._apply_gcn(self.GCN_face, data.face.x.to(device), data.face.edge_index.to(device),
+                                 data.face.batch.to(device), face_point_num)
+        x_hand = self._apply_gcn(self.GCN_hand, data.hands.x.to(device), data.hands.edge_index.to(device),
+                                 data.hands.batch.to(device), hands_point_num)
         x = torch.cat([x_body, x_face, x_hand], dim=2)
         x = x.view(-1, self.sequence_length, self.gcn_output_dim)
         x = x * nn.Softmax(dim=1)(self.gcn_attention(x))
