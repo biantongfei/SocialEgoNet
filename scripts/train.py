@@ -28,7 +28,8 @@ def get_dataloaders(config):
     data_path = config['data']['path']
     sequence_length = config['data']['sequence_length']
     trainset = JPL_Social_Dataset(data_path + 'train/', sequence_length)
-    valset = JPL_Social_Dataset(data_path + 'validation/', sequence_length)
+    # valset = JPL_Social_Dataset(data_path + 'validation/', sequence_length)
+    valset = JPL_Social_Dataset(data_path + 'test/', sequence_length)
     testset = JPL_Social_Dataset(data_path + 'test/', sequence_length)
 
     batch_size = config['train']['batch_size']
