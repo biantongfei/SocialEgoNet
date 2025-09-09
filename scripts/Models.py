@@ -81,7 +81,7 @@ class SocialEgoNet(nn.Module):
         x = torch.cat([x_body, x_head, x_hand], dim=2)
         x = x.view(-1, self.sequence_length, self.gcn_output_dim)
         x = x * nn.Softmax(dim=1)(self.gcn_attention(x))
-        on, _ = self.lstm(x)
+        on, _ = self.time_model(x)
         on = on.view(on.shape[0], on.shape[1], 2, -1)
         x = (torch.cat([on[:, :, 0, :], on[:, :, 1, :]], dim=-1))
         x = torch.sum(x * nn.Softmax(dim=1)(self.lstm_attention(x)), dim=1)
