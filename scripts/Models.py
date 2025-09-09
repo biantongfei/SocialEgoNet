@@ -50,7 +50,7 @@ class SocialEgoNet(nn.Module):
         self.gcn_output_dim = gcn_hidden_dim * (coco_body_point_num + face_point_num + hands_point_num)
         self.gcn_attention = nn.Linear(self.gcn_output_dim, 1)
         self.time_model = nn.LSTM(self.gcn_output_dim, hidden_size=lstm_hidden_dim, num_layers=lstm_num_layers,
-                            bidirectional=True, batch_first=True)
+                                  bidirectional=True, batch_first=True)
         self.lstm_attention = nn.Linear(lstm_hidden_dim * 2, 1)
         self.fc = nn.Sequential(
             nn.Linear(lstm_hidden_dim * 2, fc1_hidden),
@@ -73,8 +73,8 @@ class SocialEgoNet(nn.Module):
 
     def forward(self, data):
         print(data.body.x.device)
-        print(data.body.edge_index.shape)
-        print(data.body.batch.shape)
+        print(data.body.edge_index.device)
+        print(data.body.batch.device)
         x_body = self._apply_gcn(self.GCN_body, data.body.x, data.body.edge_index, data.body.batch, coco_body_point_num)
         x_face = self._apply_gcn(self.GCN_face, data.face.x, data.face.edge_index, data.face.batch, face_point_num)
         x_hand = self._apply_gcn(self.GCN_hand, data.hands.x, data.hands.edge_index, data.hands.batch, hands_point_num)
