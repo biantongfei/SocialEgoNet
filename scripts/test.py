@@ -56,7 +56,7 @@ def main():
     # Load Data
     testset = JPL_Social_Dataset(config["data"]["path"] + "test/", config["data"]["sequence_length"])
     test_loader = JPL_Social_DataLoader(dataset=testset, sequence_length=config["data"]["sequence_length"],
-                                        batch_size=config["train"]["batch_size"])
+                                        batch_size=config["test"]["batch_size"])
 
     # Load Model
     model = SocialEgoNet(sequence_length=config["data"]["sequence_length"], **config["model"])

@@ -1,6 +1,7 @@
 data:
   path: "../JPL_Social/"
   sequence_length: 30
+  batch_size: 128
 
 model:
   gcn_hidden_dim: 16
