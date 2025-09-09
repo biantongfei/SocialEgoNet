@@ -60,7 +60,7 @@ def main():
 
     # Load Model
     model = SocialEgoNet(sequence_length=config["data"]["sequence_length"], **config["model"])
-    model.load_checkpoint(args.check_point)
+    model.load_state_dict(torch.load(args.check_point))
     model.to(device)
 
     print("Testing...")
