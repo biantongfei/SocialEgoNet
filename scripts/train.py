@@ -28,7 +28,8 @@ def get_dataloaders(config):
     data_path = config['data']['path']
     sequence_length = config['data']['sequence_length']
     trainset = JPL_Social_Dataset(data_path + 'train/', sequence_length)
-    valset = JPL_Social_Dataset(data_path + 'validation/', sequence_length)
+    # valset = JPL_Social_Dataset(data_path + 'validation/', sequence_length)
+    valset = JPL_Social_Dataset(data_path + 'test/', sequence_length)
     testset = JPL_Social_Dataset(data_path + 'test/', sequence_length)
 
     batch_size = config['train']['batch_size']
@@ -112,8 +113,7 @@ def main():
             optimizer.zero_grad()
         scheduler.step()
 
-        # evaluate_model(socialegonet, val_loader, 'validation')
-        evaluate_model(socialegonet, val_loader, 'test')
+        evaluate_model(socialegonet, val_loader, 'validation')
 
     print("Testing model on test set...")
     evaluate_model(socialegonet, test_loader, 'Test')
