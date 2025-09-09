@@ -63,7 +63,7 @@ def main():
     print('Model:')
     print([name for name, _ in model.named_parameters()])
     print('Weights:')
-    print([name for name, _ in torch.load(args.check_point)["state_dict"].named_parameters()])
+    print([name for name, _ in torch.load(args.check_point).named_parameters()])
     model.load_state_dict(torch.load(args.check_point))
     model.to(device)
 
