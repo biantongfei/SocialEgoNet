@@ -66,7 +66,7 @@ def main():
     print('Weights:')
     print([name for name in torch.load(args.check_point).keys()])
     print('--------------------')
-    model.load_state_dict(torch.load(args.check_point))
+    model.load_state_dict(torch.load(args.check_point)[7:])
     model.to(device)
 
     print("Testing...")
