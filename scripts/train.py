@@ -117,9 +117,8 @@ def main():
     print("Testing model on test set...")
     evaluate_model(socialegonet, test_loader, 'Test')
 
-    if args.save_weights:
-        torch.save(socialegonet.state_dict(), f"weights/socialegonet_jpl.pt")
-        print(f"Model saved at weights/socialegonet_jpl.pt")
+    torch.save(socialegonet.state_dict(), f"weights/socialegonet_jpl.pt")
+    print(f"Model saved at weights/socialegonet_jpl.pt")
 
 
 if __name__ == '__main__':
