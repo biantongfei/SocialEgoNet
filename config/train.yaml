@@ -1,6 +1,6 @@
 train:
   batch_size: 128
-  num_epochs: 60
+  num_epochs: 48
   learning_rate: 0.01
   optimizer: adam
 
