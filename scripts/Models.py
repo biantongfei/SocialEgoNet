@@ -28,9 +28,9 @@ class ChainClassifier(nn.Module):
         )
 
     def forward(self, y):
-        y1 = self.intention_face(y)
-        y2 = self.attitude_face(torch.cat((y, y1), dim=1))
-        y3 = self.action_face(torch.cat((y, y1, y2), dim=1))
+        y1 = self.intention_head(y)
+        y2 = self.attitude_head(torch.cat((y, y1), dim=1))
+        y3 = self.action_head(torch.cat((y, y1, y2), dim=1))
         return y1, y2, y3
 
 
