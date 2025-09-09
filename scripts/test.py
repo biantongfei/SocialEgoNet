@@ -45,7 +45,7 @@ def evaluate(model, dataloader):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Test SocialEgoNet on JPL-P4S")
+    parser = argparse.ArgumentParser(description="Test SocialEgoNet on JPL-Social")
     parser.add_argument("--cfg", type=str, required=True, help="Path to config file")
     parser.add_argument("--check_point", type=str, required=True, help="Path to model checkpoint")
     args = parser.parse_args()

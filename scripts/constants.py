@@ -24,17 +24,17 @@ attitude_classes = ['Positive', 'Negative', 'Not_Interacting']
 action_classes = ['Handshake', 'Hug', 'Pet', 'Wave', 'Punch', 'Throw', 'Point', 'Gaze', 'Leave',
                   'No_Response']
 coco_body_point_num = 23
-head_point_num = 68
+face_point_num = 68
 hands_point_num = 42
 jpl_video_fps = 30
 
-coco_body_l_pair = [[0, 1], [0, 2], [1, 3], [2, 4],  # Head
+coco_body_l_pair = [[0, 1], [0, 2], [1, 3], [2, 4],  # face
                     [5, 7], [7, 9], [6, 8], [8, 10],  # Body
                     [5, 6], [11, 12], [5, 11], [6, 12],
                     [0, 5], [0, 6],
                     [11, 13], [12, 14], [13, 15], [14, 16],
                     [15, 17], [15, 18], [15, 19], [16, 20], [16, 21], [16, 22]]
-head_l_pair = [[23, 24], [24, 25], [25, 26], [26, 27], [27, 28], [28, 29], [29, 30], [30, 31], [31, 32],
+face_l_pair = [[23, 24], [24, 25], [25, 26], [26, 27], [27, 28], [28, 29], [29, 30], [30, 31], [31, 32],
                [32, 33], [33, 34], [34, 35], [35, 36], [36, 37], [37, 38], [38, 39],  # jawline
                [40, 41], [41, 42], [42, 43], [43, 44], [44, 50],  # right eyebrow
                [45, 46], [46, 47], [47, 48], [48, 49], [45, 50],  # left eyebrow

@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from torch_geometric.nn import GCN
 
-from constants import (intention_classes, attitude_classes, action_classes, coco_body_point_num, head_point_num,
+from constants import (intention_classes, attitude_classes, action_classes, coco_body_point_num, face_point_num,
                        hands_point_num, device)
 
 intention_class_num = len(intention_classes)
@@ -13,24 +13,24 @@ action_class_num = len(action_classes)
 class ChainClassifier(nn.Module):
     def __init__(self, in_feature_size):
         super().__init__()
-        self.intention_head = nn.Sequential(nn.ReLU(),
+        self.intention_face = nn.Sequential(nn.ReLU(),
                                             nn.Linear(in_feature_size, intention_class_num)
                                             )
-        self.attitude_head = nn.Sequential(
+        self.attitude_face = nn.Sequential(
             nn.BatchNorm1d(in_feature_size + intention_class_num),
             nn.ReLU(),
             nn.Linear(in_feature_size + intention_class_num, attitude_class_num)
         )
-        self.action_head = nn.Sequential(
+        self.action_face = nn.Sequential(
             nn.BatchNorm1d(in_feature_size + intention_class_num + attitude_class_num),
             nn.ReLU(),
             nn.Linear(in_feature_size + intention_class_num + attitude_class_num, action_class_num)
         )
 
     def forward(self, y):
-        y1 = self.intention_head(y)
-        y2 = self.attitude_head(torch.cat((y, y1), dim=1))
-        y3 = self.action_head(torch.cat((y, y1, y2), dim=1))
+        y1 = self.intention_face(y)
+        y2 = self.attitude_face(torch.cat((y, y1), dim=1))
+        y3 = self.action_face(torch.cat((y, y1, y2), dim=1))
         return y1, y2, y3
 
 
@@ -47,9 +47,9 @@ class SocialEgoNet(nn.Module):
         self.sequence_length = sequence_length
         self.gcn_hidden_dim = gcn_hidden_dim
         self._init_gcn(gcn_num_layers)
-        self.gcn_output_dim = gcn_hidden_dim * (coco_body_point_num + head_point_num + hands_point_num)
+        self.gcn_output_dim = gcn_hidden_dim * (coco_body_point_num + face_point_num + hands_point_num)
         self.gcn_attention = nn.Linear(self.gcn_output_dim, 1)
-        self.time_model = nn.LSTM(self.gcn_output_dim, hidden_size=lstm_hidden_dim, num_layers=lstm_num_layers,
+        self.lstm = nn.LSTM(self.gcn_output_dim, hidden_size=lstm_hidden_dim, num_layers=lstm_num_layers,
                                   bidirectional=True, batch_first=True)
         self.lstm_attention = nn.Linear(lstm_hidden_dim * 2, 1)
         self.fc = nn.Sequential(
@@ -64,7 +64,7 @@ class SocialEgoNet(nn.Module):
 
     def _init_gcn(self, gcn_num_layers):
         self.GCN_body = GCN(in_channels=3, hidden_channels=self.gcn_hidden_dim, num_layers=gcn_num_layers)
-        self.GCN_head = GCN(in_channels=3, hidden_channels=self.gcn_hidden_dim, num_layers=gcn_num_layers)
+        self.GCN_face = GCN(in_channels=3, hidden_channels=self.gcn_hidden_dim, num_layers=gcn_num_layers)
         self.GCN_hand = GCN(in_channels=3, hidden_channels=self.gcn_hidden_dim, num_layers=gcn_num_layers)
 
     def _apply_gcn(self, gcn, x, edge_index, batch, num_points):
@@ -74,14 +74,14 @@ class SocialEgoNet(nn.Module):
     def forward(self, data):
         x_body = self._apply_gcn(self.GCN_body, data.body.x.to(device), data.body.edge_index.to(device),
                                  data.body.batch.to(device), coco_body_point_num)
-        x_head = self._apply_gcn(self.GCN_head, data.head.x.to(device), data.head.edge_index.to(device),
-                                 data.head.batch.to(device), head_point_num)
+        x_face = self._apply_gcn(self.GCN_faece, data.face.x.to(device), data.face.edge_index.to(device),
+                                 data.face.batch.to(device), face_point_num)
         x_hand = self._apply_gcn(self.GCN_hand, data.hands.x.to(device), data.hands.edge_index.to(device),
                                  data.hands.batch.to(device), hands_point_num)
-        x = torch.cat([x_body, x_head, x_hand], dim=2)
+        x = torch.cat([x_body, x_face, x_hand], dim=2)
         x = x.view(-1, self.sequence_length, self.gcn_output_dim)
         x = x * nn.Softmax(dim=1)(self.gcn_attention(x))
-        on, _ = self.time_model(x)
+        on, _ = self.lstm(x)
         on = on.view(on.shape[0], on.shape[1], 2, -1)
         x = (torch.cat([on[:, :, 0, :], on[:, :, 1, :]], dim=-1))
         x = torch.sum(x * nn.Softmax(dim=1)(self.lstm_attention(x)), dim=1)

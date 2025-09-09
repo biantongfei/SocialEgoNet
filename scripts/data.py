@@ -5,7 +5,7 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
-from constants import coco_body_point_num, head_point_num, hands_point_num
+from constants import coco_body_point_num, face_point_num, hands_point_num
 
 
 def filter_not_interacting_sample(att_y_true, att_y_output):
@@ -34,7 +34,7 @@ class JPL_Social_Dataset(Dataset):
         frame_width, frame_height = feature_json['frame_size'][0], feature_json['frame_size'][1]
         video_frame_num = len(feature_json['frames'])
         index, frame_num = 0, 0
-        x_tensor = torch.empty((self.sequence_length, coco_body_point_num + head_point_num + hands_point_num, 3))
+        x_tensor = torch.empty((self.sequence_length, coco_body_point_num + face_point_num + hands_point_num, 3))
         while frame_num < self.sequence_length:
             if index == video_frame_num:
                 x_tensor[frame_num] = x

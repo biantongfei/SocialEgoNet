@@ -14,9 +14,8 @@ import yaml
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Train SocialEgoNet on JPL-P4S')
+    parser = argparse.ArgumentParser(description='Train SocialEgoNet on JPL-Social')
     parser.add_argument('--cfg', type=str, required=True)
-    parser.add_argument('--save_weights', type=str, default=None)
     return parser.parse_args()
 
 
@@ -118,8 +117,8 @@ def main():
     evaluate_model(socialegonet, test_loader, 'Test')
 
     if args.save_weights:
-        torch.save(socialegonet.state_dict(), f"{args.save_weights}/socialegonet_jpl.pt")
-        print(f"Model saved at {args.save_weights}/socialegonet_jpl.pt")
+        torch.save(socialegonet.state_dict(), f"weights/socialegonet_jpl.pt")
+        print(f"Model saved at weights/socialegonet_jpl.pt")
 
 
 if __name__ == '__main__':

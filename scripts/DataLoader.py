@@ -2,21 +2,21 @@ from torch.utils.data import DataLoader
 import torch
 from torch_geometric.data import Data, Batch
 
-from constants import coco_body_point_num, head_point_num, coco_body_l_pair, head_l_pair, hand_l_pair, device, dtype
+from constants import coco_body_point_num, face_point_num, coco_body_l_pair, face_l_pair, hand_l_pair, device, dtype
 
 body_edge_index = torch.Tensor(coco_body_l_pair).t().to(dtype=torch.int64)
-head_edge_index = torch.Tensor(head_l_pair).t().to(dtype=torch.int64) - coco_body_point_num
+face_edge_index = torch.Tensor(face_l_pair).t().to(dtype=torch.int64) - coco_body_point_num
 hands_edge_index = torch.Tensor(hand_l_pair).t().to(dtype=torch.int64) - (
-        coco_body_point_num + head_point_num)
+        coco_body_point_num + face_point_num)
 body_l_pair_num = len(coco_body_l_pair)
-head_l_pair_num = len(head_l_pair)
+face_l_pair_num = len(face_l_pair)
 hand_l_pair_num = len(hand_l_pair)
 
 
 class WholebodyPoseData:
     def __init__(self):
         super().__init__()
-        self.body = self.head = self.hands = None
+        self.body = self.face = self.hands = None
 
 
 class JPL_Social_DataLoader(DataLoader):
@@ -27,7 +27,7 @@ class JPL_Social_DataLoader(DataLoader):
 
     def gcn_collate_fn(self, data):
         body_pose_graph_data = []
-        head_pose_graph_data = []
+        face_pose_graph_data = []
         hand_pose_graph_data = []
         int_label = []
         att_label = []
@@ -37,18 +37,19 @@ class JPL_Social_DataLoader(DataLoader):
                 frame = d[0][i]
                 body_pose_graph_data.append(
                     Data(x=frame[:coco_body_point_num].to(dtype), edge_index=body_edge_index))
-                head_pose_graph_data.append(
-                    Data(x=frame[coco_body_point_num:coco_body_point_num + head_point_num].to(dtype),
-                         edge_index=head_edge_index))
+                face_pose_graph_data.append(
+                    Data(x=frame[coco_body_point_num:coco_body_point_num + face_point_num].to(dtype),
+                         edge_index=face_edge_index))
                 hand_pose_graph_data.append(
-                    Data(x=frame[coco_body_point_num + head_point_num:].to(dtype), edge_index=hands_edge_index))
+                    Data(x=frame[coco_body_point_num + face_point_num:].to(dtype), edge_index=hands_edge_index))
             int_label.append(d[1][0])
             att_label.append(d[1][1])
             act_label.append(d[1][2])
         whole_body_pose_data = WholebodyPoseData()
         whole_body_pose_data.body = Batch.from_data_list(body_pose_graph_data)
-        whole_body_pose_data.head = Batch.from_data_list(head_pose_graph_data)
+        whole_body_pose_data.face = Batch.from_data_list(face_pose_graph_data)
         whole_body_pose_data.hands = Batch.from_data_list(hand_pose_graph_data)
         labels = (
-            torch.Tensor(int_label).to(dtype), torch.Tensor(att_label).to(dtype), torch.Tensor(act_label).to(dtype))
+            torch.Tensor(int_label).to(torch.long), torch.Tensor(att_label).to(torch.long),
+            torch.Tensor(act_label).to(torch.long))
         return whole_body_pose_data, labels
