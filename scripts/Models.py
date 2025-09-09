@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 from torch_geometric.nn import GCN
+from collections import OrderedDict
 
 from constants import (intention_classes, attitude_classes, action_classes, coco_body_point_num, face_point_num,
                        hands_point_num, device)
@@ -50,7 +51,7 @@ class SocialEgoNet(nn.Module):
         self.gcn_output_dim = gcn_hidden_dim * (coco_body_point_num + face_point_num + hands_point_num)
         self.gcn_attention = nn.Linear(self.gcn_output_dim, 1)
         self.lstm = nn.LSTM(self.gcn_output_dim, hidden_size=lstm_hidden_dim, num_layers=lstm_num_layers,
-                                  bidirectional=True, batch_first=True)
+                            bidirectional=True, batch_first=True)
         self.lstm_attention = nn.Linear(lstm_hidden_dim * 2, 1)
         self.fc = nn.Sequential(
             nn.Linear(lstm_hidden_dim * 2, fc1_hidden),
@@ -70,6 +71,10 @@ class SocialEgoNet(nn.Module):
     def _apply_gcn(self, gcn, x, edge_index, batch, num_points):
         return gcn(x=x, edge_index=edge_index, batch=batch).view(-1, self.sequence_length,
                                                                  self.gcn_hidden_dim * num_points)
+
+    def load_checkpoint(self, check_point):
+        weights = OrderedDict([[k.split('module.')[-1], v] for k, v in torch.load(check_point).items()])
+        self.load_state_dict(weights)
 
     def forward(self, data):
         x_body = self._apply_gcn(self.GCN_body, data.body.x.to(device), data.body.edge_index.to(device),

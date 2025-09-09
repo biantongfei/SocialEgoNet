@@ -4,7 +4,6 @@ from constants import device
 from data import JPL_Social_Dataset, filter_not_interacting_sample
 
 import torch
-from collections import OrderedDict
 
 from sklearn.metrics import f1_score
 from tqdm import tqdm
@@ -59,8 +58,7 @@ def main():
 
     # Load Model
     model = SocialEgoNet(sequence_length=config["data"]["sequence_length"], **config["model"])
-    weights = OrderedDict([[k.split('module.')[-1], v] for k, v in torch.load(args.check_point).items()])
-    model.load_state_dict(weights)
+    model.load_checkpoint(args.check_point)
     model.to(device)
 
     print("Testing...")
