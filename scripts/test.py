@@ -62,8 +62,10 @@ def main():
     model = SocialEgoNet(sequence_length=config["data"]["sequence_length"], **config["model"])
     print('Model:')
     print([name for name, _ in model.named_parameters()])
+    print('-----------------------')
     print('Weights:')
     print([name for name in torch.load(args.check_point).keys()])
+    print('--------------------')
     model.load_state_dict(torch.load(args.check_point))
     model.to(device)
 
