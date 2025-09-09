@@ -118,7 +118,7 @@ def main():
         evaluate_model(epoch, socialegonet, val_loader, 'validation')
 
     print("Testing model on test set...")
-    evaluate_model(socialegonet, test_loader, 'Test')
+    evaluate_model(0, socialegonet, test_loader, 'Test')
 
     torch.save(socialegonet.state_dict(), f"weights/socialegonet_jpl.pt")
     print(f"Model saved at weights/socialegonet_jpl.pt")
