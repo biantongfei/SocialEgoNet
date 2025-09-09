@@ -6,6 +6,7 @@ from data import JPL_Social_Dataset, filter_not_interacting_sample
 import torch
 from torch.nn import functional
 from torch.optim.lr_scheduler import StepLR
+from torch.optim.lr_scheduler import StepLR, CosineAnnealingLR
 
 from sklearn.metrics import f1_score
 from tqdm import tqdm
@@ -98,7 +99,10 @@ def main():
     socialegonet = create_model(config)
     if config['train']['optimizer'] == 'adam':
         optimizer = torch.optim.Adam(socialegonet.parameters(), lr=config['train']['learning_rate'])
-    scheduler = StepLR(optimizer, step_size=10, gamma=0.5)
+    elif config['train']['optimizer'] == 'adamw':
+        optimizer = torch.optim.AdamW(socialegonet.parameters(), lr=config['train']['learning_rate'])
+    # scheduler = StepLR(optimizer, step_size=10, gamma=0.5)
+    scheduler = CosineAnnealingLR(optimizer, T_max=config['train']['num_epochs'])
 
     for epoch in range(config['train']['num_epochs']):
         socialegonet.train()
