@@ -61,7 +61,7 @@ def main():
 
     # Load Model
     model = SocialEgoNet(sequence_length=config["data"]["sequence_length"], **config["model"])
-    weights = OrderedDict([[k.split('module.')[-1], v.cuda(device)] for k, v in torch.load(args.check_point)])
+    weights = OrderedDict([[k.split('module.')[-1], v] for k, v in torch.load(args.check_point).items()])
     model.load_state_dict(weights)
     model.to(device)
 
