@@ -72,9 +72,6 @@ class SocialEgoNet(nn.Module):
                                                                  self.gcn_hidden_dim * num_points)
 
     def forward(self, data):
-        print(data.body.x.device)
-        print(data.body.edge_index.device)
-        print(data.body.batch.device)
         x_body = self._apply_gcn(self.GCN_body, data.body.x, data.body.edge_index, data.body.batch, coco_body_point_num)
         x_face = self._apply_gcn(self.GCN_face, data.face.x, data.face.edge_index, data.face.batch, face_point_num)
         x_hand = self._apply_gcn(self.GCN_hand, data.hands.x, data.hands.edge_index, data.hands.batch, hands_point_num)

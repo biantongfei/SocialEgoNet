@@ -24,7 +24,8 @@ def evaluate(model, dataloader):
 
     with torch.no_grad():
         for inputs, (int_labels, att_labels, act_labels) in tqdm(dataloader, dynamic_ncols=True, desc="Testing"):
-            int_labels, att_labels, act_labels = int_labels.to(device), att_labels.to(device), act_labels.to(device)
+            inputs, int_labels, att_labels, act_labels = inputs.to(device), int_labels.to(device), att_labels.to(
+                device), act_labels.to(device)
 
             int_outputs, att_outputs, act_outputs = model(inputs)
 
