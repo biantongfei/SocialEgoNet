@@ -2,7 +2,7 @@ train:
   batch_size: 128
   num_epochs: 53
   learning_rate: 0.01
-  optimizer: adam
+  optimizer: adamw
 
 data:
   path: "../JPL_Social/"
