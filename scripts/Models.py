@@ -13,15 +13,15 @@ action_class_num = len(action_classes)
 class ChainClassifier(nn.Module):
     def __init__(self, in_feature_size):
         super().__init__()
-        self.intention_face = nn.Sequential(nn.ReLU(),
+        self.intention_head = nn.Sequential(nn.ReLU(),
                                             nn.Linear(in_feature_size, intention_class_num)
                                             )
-        self.attitude_face = nn.Sequential(
+        self.attitude_head = nn.Sequential(
             nn.BatchNorm1d(in_feature_size + intention_class_num),
             nn.ReLU(),
             nn.Linear(in_feature_size + intention_class_num, attitude_class_num)
         )
-        self.action_face = nn.Sequential(
+        self.action_head = nn.Sequential(
             nn.BatchNorm1d(in_feature_size + intention_class_num + attitude_class_num),
             nn.ReLU(),
             nn.Linear(in_feature_size + intention_class_num + attitude_class_num, action_class_num)
@@ -74,7 +74,7 @@ class SocialEgoNet(nn.Module):
     def forward(self, data):
         x_body = self._apply_gcn(self.GCN_body, data.body.x.to(device), data.body.edge_index.to(device),
                                  data.body.batch.to(device), coco_body_point_num)
-        x_face = self._apply_gcn(self.GCN_faece, data.face.x.to(device), data.face.edge_index.to(device),
+        x_face = self._apply_gcn(self.GCN_face, data.face.x.to(device), data.face.edge_index.to(device),
                                  data.face.batch.to(device), face_point_num)
         x_hand = self._apply_gcn(self.GCN_hand, data.hands.x.to(device), data.hands.edge_index.to(device),
                                  data.hands.batch.to(device), hands_point_num)
