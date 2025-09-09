@@ -31,6 +31,7 @@ def get_dataloaders(config):
     # valset = JPL_Social_Dataset(data_path + 'validation/', sequence_length)
     valset = JPL_Social_Dataset(data_path + 'test/', sequence_length)
     testset = JPL_Social_Dataset(data_path + 'test/', sequence_length)
+    print('JPL_Social Dataset Size, trainset:%d, valset:%d, testset:%d' % (len(trainset), len(valset), len(testset)))
 
     batch_size = config['train']['batch_size']
     train_loader = JPL_Social_DataLoader(trainset, batch_size=batch_size, sequence_length=sequence_length)
@@ -54,7 +55,7 @@ def create_model(config):
 
 
 @torch.no_grad()
-def evaluate_model(model, dataloader, task):
+def evaluate_model(epoch, model, dataloader, task):
     model.eval()
 
     metrics = {"int": {"true": [], "pred": []}, "att": {"true": [], "pred": []}, "act": {"true": [], "pred": []}}
@@ -81,9 +82,10 @@ def evaluate_model(model, dataloader, task):
         f1 = f1_score(y_true, y_pred, average='weighted')
         results[key] = {"acc": acc * 100, "f1": f1 * 100}
 
-    print(f"{task} Results -> int_acc: {results['int']['acc']:.2f}, int_f1: {results['int']['f1']:.2f}, "
-          f"att_acc: {results['att']['acc']:.2f}, att_f1: {results['att']['f1']:.2f}, "
-          f"act_acc: {results['act']['acc']:.2f}, act_f1: {results['act']['f1']:.2f}")
+    print(
+        f"{task} Results -> epoch: {epoch}, int_acc: {results['int']['acc']:.2f}, int_f1: {results['int']['f1']:.2f}, "
+        f"att_acc: {results['att']['acc']:.2f}, att_f1: {results['att']['f1']:.2f}, "
+        f"act_acc: {results['act']['acc']:.2f}, act_f1: {results['act']['f1']:.2f}")
 
     return results
 
@@ -113,7 +115,7 @@ def main():
             optimizer.zero_grad()
         scheduler.step()
 
-        evaluate_model(socialegonet, val_loader, 'validation')
+        evaluate_model(epoch, socialegonet, val_loader, 'validation')
 
     print("Testing model on test set...")
     evaluate_model(socialegonet, test_loader, 'Test')
