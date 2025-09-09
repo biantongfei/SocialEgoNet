@@ -17,7 +17,6 @@ class JPL_Social_Dataset(Dataset):
     def __init__(self, data_path, sequence_length):
         super().__init__()
         self.files = os.listdir(data_path)
-        self.files = [i for i in self.files if 'ori_' in i]
         self.data_path = data_path
         self.sequence_length = sequence_length
         self.features, self.labels = [], []
